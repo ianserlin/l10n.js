@@ -84,14 +84,19 @@ helper function to localize strings. The reason I don't define this in l10n.js i
 introduce any new globals, which keeps l10n.js a one of the JavaScript libraries
 least-prone to conflicts with other libraries.
 
-    var l = function (string) {
-        return string.toLocaleString();
-    };
+  function l() {
+  	var localizedString = (arguments[0]).toLocaleString();
+  	for(var i = 1; i < arguments.length; i++){
+  		localizedString = localizedString.replace(new RegExp('\\{'+(i-1)+'\\}','g'), arguments[i]);
+  	}
+      return localizedString;
+  }
 
 With this helper function, you can start writing `l("Your localizable string")` instead
 of `"Your localizable string".toLocaleString()`. I chose `l` instead of `_` (an
 underscore), because it's easier to spot so you can quickly skim your code to see which
-strings are localizable.
+strings are localizable. It also adds the ability to provide a variable amount of additional
+arguments that are substituted into the translated string, e.g. l('chart_title','day','weight') would result in 'day vs. weight' given that chart_title: "{0} vs. {1}" in your localization definition.
 
 
 ### Variable replacement
