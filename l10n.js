@@ -134,6 +134,9 @@ newcap: true, immed: true, maxlen: 90, indent: 4 */
 		
 		delete loadQueues[locale];
 	}
+	, retrieve = function(tree,keys) {
+		
+	}
 	
 	;
 	
@@ -205,8 +208,16 @@ newcap: true, immed: true, maxlen: 90, indent: 4 */
 			if (locale in loadQueues) {
 				processLoadQueue(locale);
 			}
-			if (locale in localizations && thisValue in localizations[locale]) {
-				return localizations[locale][thisValue];
+			if (locale in localizations ){
+				var keys = thisValue.split('.');
+				var branch = localizations[locale];
+				for(var i = 0; i < keys.length; i++ ){
+					if (typeof branch[keys[i]] === stringType) {
+						return branch[keys[i]];
+					}else{
+						branch = branch[keys[i]];
+					}
+				}
 			}
 		}
 		while (i--);
