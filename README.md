@@ -96,7 +96,7 @@ With this helper function, you can start writing `l("Your localizable string")` 
 of `"Your localizable string".toLocaleString()`. I chose `l` instead of `_` (an
 underscore), because it's easier to spot so you can quickly skim your code to see which
 strings are localizable. It also adds the ability to provide a variable amount of additional
-arguments that are substituted into the translated string, e.g. l('chart_title','day','weight') would result in 'day vs. weight' given that chart_title: "{0} vs. {1}" in your localization definition.
+arguments that are substituted into the translated string, e.g. `l('chart_title','day','weight')` would result in "day vs. weight" given that "chart_title": "{0} vs. {1}" is defined your localization definition, where `{0}` and `{1}` refer to the first and second additional arguments, respectively.
 
 
 ### Variable replacement
